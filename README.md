@@ -1,4 +1,4 @@
-# RESTful API Node Server Boilerplate
+# Altoros Evaluator Backend
 
 Boilerplate taken from https://github.com/hagopj13/node-express-boilerplate
 
