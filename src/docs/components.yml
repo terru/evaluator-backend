@@ -19,6 +19,27 @@ components:
         name: fake name
         role: user
 
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        manager:
+          type: string
+        users:
+          type: array
+        status:
+          type: string
+          enum: [Active,Inactive]
+      example:
+        id: 5ebac534954b54139806c111
+        name: Super Team
+        manager: 5ebac534954b54139806c112
+        status: Active
+        users: [5ebac534954b54139806c112]
+
     Token:
       type: object
       properties:
@@ -84,6 +105,24 @@ components:
           example:
             code: 404
             message: Not found
+    ManagerNoExist:
+      description: Manager doesn't exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Manager doesn't exist
+    UserAlreadyExist:
+      description: User already exist in the team
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: User already exist in the team
 
   securitySchemes:
     bearerAuth:
