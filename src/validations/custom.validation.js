@@ -1,3 +1,8 @@
+/*
+ * Custom validation functions library
+ * add custom validators here to use them with Joi
+ */
+
 const objectId = (value, helpers) => {
   if (!value.match(/^[0-9a-fA-F]{24}$/)) {
     return helpers.message('"{{#label}}" must be a valid mongo id');
