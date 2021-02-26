@@ -17,7 +17,7 @@ const getTeams = catchAsync(async (req, res) => {
 });
 
 const getTeam = catchAsync(async (req, res) => {
-  const team = await teamService.getTeamById(req.params.userId);
+  const team = await teamService.getTeamById(req.params.teamId);
   if (!team) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Team not found');
   }
@@ -25,7 +25,7 @@ const getTeam = catchAsync(async (req, res) => {
 });
 
 const updateTeam = catchAsync(async (req, res) => {
-  const team = await teamService.updateTeamById(req.params.userId, req.body);
+  const team = await teamService.updateTeamById(req.params.teamId, req.body);
   res.send(team);
 });
 

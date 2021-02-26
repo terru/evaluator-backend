@@ -32,9 +32,9 @@ const queryTeams = async (filter, options) => {
 };
 
 /**
- * Get user by id
+ * Get team by id
  * @param {ObjectId} id
- * @returns {Promise<User>}
+ * @returns {Promise<Team>}
  */
 const getTeamById = async (id) => {
   return Team.findById(id);

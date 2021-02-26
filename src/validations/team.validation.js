@@ -53,7 +53,7 @@ const addUserToTeam = {
     teamId: Joi.string().custom(objectId),
   }),
   body: Joi.object().keys({
-    user: Joi.required().string().custom(objectId),
+    user: Joi.string().required().custom(objectId),
   }),
 };
 
@@ -62,7 +62,7 @@ const deleteUserFromTeam = {
     teamId: Joi.string().custom(objectId),
   }),
   body: Joi.object().keys({
-    user: Joi.required().string().custom(objectId),
+    user: Joi.string().required().custom(objectId),
   }),
 };
 
