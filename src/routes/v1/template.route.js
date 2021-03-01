@@ -8,16 +8,20 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageForms'), validate(templateValidation.createTeam), templateController.createTemplate)
-  .get(auth('getForms'), validate(templateValidation.getTeams), templateController.getTemplates);
+  .post(auth('manageForms'), validate(templateValidation.createTemplate), templateController.createTemplate)
+  .get(auth('getForms'), validate(templateValidation.getTemplates), templateController.getTemplates);
 
 router
   .route('/:templateId')
-  .get(auth('getForms'), validate(templateValidation.getTeam), templateController.getTemplate)
-  .patch(auth('manageForms'), validate(templateValidation.updateTeam), templateController.updateTemplate)
-  .delete(auth('manageForms'), validate(templateValidation.deleteTeam), templateController.deleteTemplate);
+  .get(auth('getForms'), validate(templateValidation.getTemplate), templateController.getTemplate)
+  .patch(auth('manageForms'), validate(templateValidation.updateTemplate), templateController.updateTemplate)
+  .delete(auth('manageForms'), validate(templateValidation.deleteTemplate), templateController.deleteTemplate);
 
-// TODO questions should be /:templateId/questions
+router
+  .route('/:templateId/questions')
+  .post(auth('manageForms'), validate(templateValidation.addQuestion), templateController.addQuestionToTemplate)
+  .delete(auth('manageForms'), validate(templateValidation.deleteQuestion), templateController.deleteQuestionFromTemplate);
+
 module.exports = router;
 
 /**
@@ -232,3 +236,77 @@ module.exports = router;
  *        "404":
  *          $ref: '#/components/responses/NotFound'
  */
+
+/**
+ * @swagger
+ * path:
+ *  /templates/{id}/questions:
+ *    post:
+ *      summary: Add a question to a form
+ *      description: Only Admins can add questions to a form for now.
+ *      tags: [Templates]
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: string
+ *          description: Template id
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - question
+ *              properties:
+ *                question:
+ *                  type: string
+ *                  description: question should be a valid question id
+ *              example:
+ *                question: 5ebac534954b54139806b333
+ *      responses:
+ *        "200":
+ *          description: OK
+ *          content:
+ *            application/json:
+ *              schema:
+ *                 $ref: '#/components/schemas/Template'
+ *        "400":
+ *          $ref: '#/components/responses/AlreadyExist'
+ *        "401":
+ *          $ref: '#/components/responses/Unauthorized'
+ *        "403":
+ *          $ref: '#/components/responses/Forbidden'
+ *
+ *    delete:
+ *      summary: Delete a question from a Template
+ *      description: Only admins can remove questions from a template for now.
+ *      tags: [Templates]
+ *      security:
+ *        - bearerAuth: []
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: string
+ *          description: Template id
+ *        - in: query
+ *          name: hardDelete
+ *          schema:
+ *            type: string
+ *          description: enable hard delete
+ *      responses:
+ *        "200":
+ *          description: No content
+ *        "401":
+ *          $ref: '#/components/responses/Unauthorized'
+ *        "403":
+ *          $ref: '#/components/responses/Forbidden'
+ *        "404":
+ *          $ref: '#/components/responses/NotFound'
+ * */

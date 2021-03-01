@@ -1,6 +1,8 @@
+const _ = require('lodash');
 const httpStatus = require('http-status');
-const { Template } = require('../models');
+const { Template, Question } = require('../models');
 const ApiError = require('../utils/ApiError');
+const { findById } = require('../models/user.model');
 
 /**
  * Create a template
@@ -60,7 +62,7 @@ const updateTemplateById = async (templateId, updateBody) => {
 const deleteTemplateById = async (templateId, hardDelete = false) => {
   const template = await getTemplateById(templateId);
   if (!template) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Team not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Template not found');
   }
   // remove if its hardDelete
   if (hardDelete) {
@@ -73,7 +75,61 @@ const deleteTemplateById = async (templateId, hardDelete = false) => {
   return template;
 };
 
-// TODO implement questions management
+/**
+ * Questions management
+ */
+
+/**
+ * Add a question to a template by id
+ * @param {ObjectId} teamId
+ * @param {ObjectId} userId
+ * @returns {Promise<Template>}
+ */
+const addQuestionToTemplate = async (templateId, questionId) => {
+  const template = await getTemplateById(templateId);
+  if (!template) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Template not found');
+  }
+  const question = await Question.findById(questionId);
+  if (!question) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Question not found');
+  }
+  const hasQuestion =
+    _.findIndex(template.questions, (q) => {
+      return q._id === question._id;
+    }) === -1;
+  if (hasQuestion) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User already exist in the team');
+  }
+  template.questions.add(question);
+  await template.save();
+  return template;
+};
+
+/**
+ *  Remove a question from a template by id
+ * @param {*} templateId
+ * @param {*} questionId
+ */
+const removeQuestionFromTemplate = async (templateId, questionId) => {
+  const template = await getTemplateById(templateId);
+  if (!template) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Template not found');
+  }
+  const question = await findById(questionId);
+  if (!question) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Question not found');
+  }
+  const questionIndex = _.findIndex(template.questions, (q) => {
+    return q._id === question._id;
+  });
+  if (questionIndex === -1) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Question does not exist in the template');
+  }
+  template.questions.splice(questionIndex, 1);
+  await template.save();
+  return template;
+};
 
 module.exports = {
   createTemplate,
@@ -81,4 +137,6 @@ module.exports = {
   getTemplateById,
   updateTemplateById,
   deleteTemplateById,
+  addQuestionToTemplate,
+  removeQuestionFromTemplate,
 };

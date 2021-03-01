@@ -32,7 +32,7 @@ components:
           type: array
         status:
           type: string
-          enum: [Active,Inactive]
+          enum: [Active, Inactive]
       example:
         id: 5ebac534954b54139806c111
         name: Super Team
@@ -52,7 +52,7 @@ components:
           enum: [Active, Inactive]
       example:
         id: 5ebac534954b54139806c333
-        name: "An awesome Template"
+        name: 'An awesome Template'
         status: Active
         users: [5ebac534954b54139806c212]
 
@@ -139,6 +139,15 @@ components:
           example:
             code: 400
             message: User already exist in the team
+    AlreadyExist:
+      description: Entity already exist in the collection
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: The collection already have that entity id
 
   securitySchemes:
     bearerAuth:

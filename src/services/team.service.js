@@ -92,7 +92,7 @@ USERS MANAGEMENT
  * @returns {Promise<Team>}
  */
 const addUserToTeam = async (teamId, userId) => {
-  const user = await User.getUserById(userId);
+  const user = await User.findById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
@@ -118,7 +118,7 @@ const addUserToTeam = async (teamId, userId) => {
  * @param {*} userId
  */
 const removeUserFromTeam = async (teamId, userId) => {
-  const user = await User.getUserById(userId);
+  const user = await User.findById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }

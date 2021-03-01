@@ -10,10 +10,9 @@ const teamSchema = mongoose.Schema(
       trim: true,
     },
     manager: {
-      type: String,
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'User',
       required: true,
-      trim: true,
-      lowercase: true,
       validate(value) {
         if (!validator.isMongoId(value)) {
           throw new Error('Invalid id for manager');

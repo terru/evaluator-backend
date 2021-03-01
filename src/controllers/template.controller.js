@@ -35,7 +35,17 @@ const deleteTemplate = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-// TODO add questions to template
+const addQuestionToTemplate = catchAsync(async (req, res) => {
+  const { questionId } = pick(req.body, ['question']);
+  const template = await templateService.addQuestionToTemplate(req.params.teamId, questionId);
+  res.send(template);
+});
+
+const deleteQuestionFromTemplate = catchAsync(async (req, res) => {
+  const { questionId } = pick(req.body, ['question']);
+  const template = await templateService.removeQuestionFromTemplate(req.params.teamId, questionId);
+  res.send(template);
+});
 
 module.exports = {
   createTemplate,
@@ -43,4 +53,6 @@ module.exports = {
   getTemplate,
   updateTemplate,
   deleteTemplate,
+  addQuestionToTemplate,
+  deleteQuestionFromTemplate,
 };

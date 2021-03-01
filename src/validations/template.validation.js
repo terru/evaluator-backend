@@ -46,10 +46,30 @@ const deleteTemplate = {
   }),
 };
 
+const addQuestion = {
+  params: Joi.object().keys({
+    templateId: Joi.string().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    question: Joi.string().required().custom(objectId),
+  }),
+};
+
+const deleteQuestion = {
+  params: Joi.object().keys({
+    templateId: Joi.string().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    question: Joi.string().required().custom(objectId),
+  }),
+};
+
 module.exports = {
   createTemplate,
   getTemplates,
   getTemplate,
   updateTemplate,
   deleteTemplate,
+  addQuestion,
+  deleteQuestion,
 };
