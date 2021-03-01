@@ -245,7 +245,7 @@ module.exports = router;
  *    post:
  *      summary: Add an user to a team
  *      description: Only Admins can add users to a team for now.
- *      tags: [Teams,Users]
+ *      tags: [Teams]
  *      security:
  *        - bearerAuth: []
  *      parameters:
@@ -286,7 +286,7 @@ module.exports = router;
  *    delete:
  *      summary: Delete an user from a Team
  *      description: Only admins can remove users from a team for now.
- *      tags: [Teams,Users]
+ *      tags: [Teams]
  *      security:
  *        - bearerAuth: []
  *      parameters:

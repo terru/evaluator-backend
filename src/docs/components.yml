@@ -40,6 +40,22 @@ components:
         status: Active
         users: [5ebac534954b54139806c112]
 
+    Template:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum: [Active, Inactive]
+      example:
+        id: 5ebac534954b54139806c333
+        name: "An awesome Template"
+        status: Active
+        users: [5ebac534954b54139806c212]
+
     Token:
       type: object
       properties:
