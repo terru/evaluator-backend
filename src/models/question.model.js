@@ -27,8 +27,8 @@ questionSchema.plugin(toJSON);
 questionSchema.plugin(paginate);
 
 /**
- * @typedef Template
+ * @typedef Question
  */
-const Template = mongoose.model('Question', questionSchema);
+const Question = mongoose.model('Question', questionSchema);
 
-module.exports = Template;
+module.exports = Question;

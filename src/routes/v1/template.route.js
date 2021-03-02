@@ -61,7 +61,7 @@ module.exports = router;
  *              example:
  *                name: Weekly feedback
  *                status: Active
- *                questions: ÑArray of mongo ids
+ *                questions: Array of mongo ids
  *      responses:
  *        "201":
  *          description: Created

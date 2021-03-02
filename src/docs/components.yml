@@ -56,6 +56,29 @@ components:
         status: Active
         users: [5ebac534954b54139806c212]
 
+    Question:
+      type: object
+      properties:
+        id:
+          type: string
+        question:
+          type: string
+        status:
+          type: string
+          enum: [Active, Inactive]
+        questionType:
+          type: string
+        optional:
+          type: boolean
+        comments:
+          type: boolean
+      example:
+        id: 5ebac534954b541398064555
+        question: 'How was your day?'
+        status: Active
+        questionType: 5ebac534954b54139806f111
+        optional: true
+
     Token:
       type: object
       properties:
