@@ -56,6 +56,27 @@ components:
         status: Active
         users: [5ebac534954b54139806c212]
 
+    QuestionType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        values:
+          type: Mixed
+          description: could have the HTML to render the type of question
+        status:
+          type: string
+          enum: [Active, Inactive]
+          description: Active is default
+        units:
+           type: string
+      example:
+        name: "TextInput"
+        values: "<input type='text'/>"
+        units: "chars"
+
     Question:
       type: object
       properties:

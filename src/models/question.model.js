@@ -7,6 +7,11 @@ const questionSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  status: {
+    type: String,
+    trim: true,
+    default: 'Active', // set to 'Inactive' to soft delete
+  },
   questionType: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'QuestionType',

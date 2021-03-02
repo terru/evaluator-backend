@@ -9,7 +9,6 @@ const templateSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    required: true,
     trim: true,
     default: 'Active', // set to 'Inactive' to soft delete
   },

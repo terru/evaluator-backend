@@ -8,3 +8,4 @@ module.exports.userValidation = require('./user.validation');
 module.exports.teamValidation = require('./team.validation');
 module.exports.templateValidation = require('./template.validation');
 module.exports.questionValidation = require('./question.validation');
+module.exports.qeestionTypeValidation = require('./questionType.validation');

@@ -53,7 +53,7 @@ const updateQuestionById = async (questionId, updateBody) => {
 
 /**
  * Delete Question by id
- * @param {ObjectId} teamId
+ * @param {ObjectId} questionId
  * @param {Boolean} hardDelete
  * @returns {Promise<Question>}
  */

@@ -55,7 +55,7 @@ const updateTemplateById = async (templateId, updateBody) => {
 
 /**
  * Delete Template by id
- * @param {ObjectId} teamId
+ * @param {ObjectId} templateId
  * @param {Boolean} hardDelete
  * @returns {Promise<Template>}
  */
